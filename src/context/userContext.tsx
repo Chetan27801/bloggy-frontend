@@ -1,7 +1,7 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
-
+import { useNavigate } from "react-router-dom";
 type userType = {
 	_id: string;
 	name: string;
@@ -26,6 +26,7 @@ export const UserContext = createContext<userContextType | null>(null);
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
 	const [user, setUser] = useState<userType | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (user) return;
@@ -59,6 +60,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 		setUser(null);
 		localStorage.removeItem("token");
 		setLoading(false);
+		navigate("/login");
 	};
 
 	return (
@@ -66,6 +68,14 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 			{children}
 		</UserContext.Provider>
 	);
+};
+
+export const useUser = (): userContextType => {
+	const context = useContext(UserContext);
+	if (!context) {
+		throw new Error("useUser must be used within a UserProvider");
+	}
+	return context;
 };
 
 export default UserProvider;

@@ -59,8 +59,6 @@ export function SignInForm({
 			profileImageUrl = imageUploadResponse.url || "";
 		}
 
-		console.log("profileImageUrl", profileImageUrl);
-
 		try {
 			const response = await axiosInstance.post(API_PATHS.AUTH.SIGNUP, {
 				name: data.name,
