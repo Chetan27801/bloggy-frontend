@@ -68,20 +68,12 @@ export function SignInForm({
 				avatar: profileImageUrl,
 			});
 
-			const { token, role } = response.data;
+			const { token } = response.data;
 
 			if (token) {
 				localStorage.setItem("token", token);
 				updateUser(response.data);
-				if (role === "admin") {
-					navigate("/admin/dashboard");
-				} else if (role === "author") {
-					navigate("/author/dashboard");
-				} else if (role === "reader") {
-					navigate("/reader/dashboard");
-				} else {
-					navigate("/signup");
-				}
+				navigate("/");
 			}
 		} catch (error) {
 			console.error("Login failed:", error);
