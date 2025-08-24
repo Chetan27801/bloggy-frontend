@@ -34,7 +34,6 @@ const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ user }) => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<Error | null>(null);
 
-	// Mock data - replace with real API calls
 	const [stats, setStats] = useState<Stats>({
 		totalPosts: 0,
 		totalPublishedPosts: 0,
