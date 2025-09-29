@@ -217,7 +217,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
 					{showReplyForm && (
 						<div className="mt-4">
 							<CreateComment
-								postId={comment.postId}
+								postId={comment.postId._id}
 								parentCommentId={comment._id}
 								onCommentAdded={handleReplySubmitted}
 								placeholder={`Reply to ${comment.userId.name}...`}
